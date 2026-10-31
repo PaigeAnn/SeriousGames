@@ -1,6 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 // Cat Needs:
 // grooming
@@ -20,6 +20,11 @@ public class CatBehaviorScript : MonoBehaviour
     int thirstLevel = 0;
     int affectionLevel = 0;
 
+    public Image groomingBar;
+    public Image hungerBar;
+    public Image thirstBar;
+    public Image affectionBar;
+
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -34,6 +39,7 @@ public class CatBehaviorScript : MonoBehaviour
         thirstLevel = thirstNeed;
         affectionLevel = affectionNeed;
 
+        StartCoroutine(Decrement());
         //Debug.Log(groomingNeed + ": " + groomingLevel);
         //Debug.Log(hungerNeed + ": " + hungerLevel);
         //Debug.Log(thirstNeed + ": " + thirstLevel);
@@ -44,7 +50,6 @@ public class CatBehaviorScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartCoroutine(Decrement());
 
         //Debug.Log(groomingNeed + ": " + groomingLevel);
         //Debug.Log(hungerNeed + ": " + hungerLevel);
@@ -54,18 +59,32 @@ public class CatBehaviorScript : MonoBehaviour
 
     IEnumerator Decrement()
     {
-        if (groomingLevel != 0) groomingLevel -= 1;
-        if (hungerLevel != 0) hungerLevel -= 1;
-        if (thirstLevel != 0) thirstLevel -= 1;
-        if (affectionLevel != 0) affectionLevel -= 1;
+        while (true)
+        {
+            if (groomingLevel != 0) groomingLevel -= 1;
+            if (hungerLevel != 0) hungerLevel -= 1;
+            if (thirstLevel != 0) thirstLevel -= 1;
+            if (affectionLevel != 0) affectionLevel -= 1;
 
-        yield return new WaitForSeconds (5.0f);
+            groomingBar.fillAmount = (float)groomingLevel / groomingNeed;
+            hungerBar.fillAmount = (float)hungerLevel / hungerNeed;
+            thirstBar.fillAmount = (float)thirstLevel / thirstNeed;
+            affectionBar.fillAmount = (float)affectionLevel / affectionNeed;
+
+            Debug.Log(groomingNeed + ": " + groomingLevel);
+            Debug.Log(hungerNeed + ": " + hungerLevel);
+            Debug.Log(thirstNeed + ": " + thirstLevel);
+            Debug.Log(affectionNeed + ": " + affectionLevel);
+
+            yield return new WaitForSeconds(5.0f);
+        }
     }
     public void Feed()
     {
         if (hungerLevel != hungerNeed)
         {
             hungerLevel = hungerNeed;
+            hungerBar.fillAmount = 1f;
             Debug.Log(hungerNeed + ": " + hungerLevel);
         }
     }
@@ -75,15 +94,17 @@ public class CatBehaviorScript : MonoBehaviour
         if (thirstLevel != thirstNeed)
         {
             thirstLevel = thirstNeed;
+            thirstBar.fillAmount = 1f;
             Debug.Log(thirstNeed + ": " + thirstLevel);
         }
     }
-
+    
     public void Groom()
     {
         if (groomingLevel != groomingNeed)
         {
             groomingLevel = groomingNeed;
+            groomingBar.fillAmount = 1f; 
             Debug.Log(groomingNeed + ": " + groomingLevel);
         }
     }
@@ -93,6 +114,7 @@ public class CatBehaviorScript : MonoBehaviour
         if (affectionLevel != affectionNeed)
         {
             affectionLevel = affectionNeed;
+            affectionBar.fillAmount = 1f;
             Debug.Log(affectionNeed + ": " + affectionLevel);
         }
     }
