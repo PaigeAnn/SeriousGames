@@ -11,7 +11,7 @@ public class CatManagerScript : MonoBehaviour
     int maxCats;
     //how long to wait between cat spawning
     [SerializeField]
-    float waitTime = 60;
+    float waitTime = 5;
     int totalCats = 0;
     //where the cat is spawned, set to this
     //gameObject's position by default

@@ -25,6 +25,7 @@ public class CatBehaviorScript : MonoBehaviour
     public Image thirstBar;
     public Image affectionBar;
 
+    public GameObject panel;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,6 +56,17 @@ public class CatBehaviorScript : MonoBehaviour
         //Debug.Log(hungerNeed + ": " + hungerLevel);
         //Debug.Log(thirstNeed + ": " + thirstLevel);
         //Debug.Log(affectionNeed + ": " + affectionLevel);
+    }
+
+    public void Activate()
+    {
+        Debug.Log("Activate");
+        panel.SetActive(true);
+    }
+    public void Deactivate()
+    {
+        Debug.Log("Deactivate");
+        panel.SetActive(false);
     }
 
     IEnumerator Decrement()
