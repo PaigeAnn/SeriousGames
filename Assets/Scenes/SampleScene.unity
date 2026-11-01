@@ -590,7 +590,7 @@ PrefabInstance:
       objectReference: {fileID: 2269445977543574819}
     - target: {fileID: 3556611393545340247, guid: 800f970a4c5470241b6be0a0057f3f79, type: 3}
       propertyPath: waitTime
-      value: 60
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 6137621150656876476, guid: 800f970a4c5470241b6be0a0057f3f79, type: 3}
       propertyPath: m_LocalPosition.x
